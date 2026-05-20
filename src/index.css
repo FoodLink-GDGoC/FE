@@ -1,0 +1,35 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* { box-sizing: border-box; }
+body {
+  font-family: 'Pretendard', -apple-system, sans-serif;
+  background: #E2DAD0;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+}
+#root {
+  width: 390px;
+  min-height: 100vh;
+  background: #F6F1EB;
+  position: relative;
+  overflow-x: hidden;
+}
+
+@layer components {
+  .btn-primary { @apply w-full py-[15px] bg-[#7C4D2F] text-white font-semibold text-[15px] rounded-xl active:opacity-80; }
+  .btn-secondary { @apply w-full py-[15px] bg-[#EDE7DF] text-[#6B5A4E] font-semibold text-[15px] rounded-xl border border-[#DDD4C8]; }
+  .btn-outline { @apply w-full py-[15px] bg-transparent text-[#6B5A4E] font-semibold text-[15px] rounded-xl border border-[#DDD4C8]; }
+  .btn-danger { @apply w-full py-[15px] bg-red-50 text-red-500 font-semibold text-[15px] rounded-xl border border-red-100; }
+  .card { @apply bg-white border border-[#DDD4C8] rounded-2xl p-4; }
+  .input-field { @apply w-full px-4 py-[13px] bg-white border border-[#DDD4C8] rounded-xl text-[15px] text-[#1A1208] placeholder:text-[#A0917F] outline-none focus:border-[#7C4D2F]; }
+  .badge-free { @apply px-2.5 py-1 bg-[#E6F4EC] text-[#1A5C36] text-xs font-bold rounded-full whitespace-nowrap; }
+  .badge-paid { @apply px-2.5 py-1 bg-amber-50 text-amber-700 text-xs font-bold rounded-full whitespace-nowrap; }
+  .badge-confirm { @apply px-2.5 py-1 bg-[#E6F4EC] text-[#1A5C36] text-xs font-bold rounded-full whitespace-nowrap; }
+  .badge-wait { @apply px-2.5 py-1 bg-amber-50 text-amber-700 text-xs font-bold rounded-full whitespace-nowrap; }
+  .badge-done { @apply px-2.5 py-1 bg-[#EDE7DF] text-[#A0917F] text-xs font-bold rounded-full whitespace-nowrap; }
+  .badge-cancel { @apply px-2.5 py-1 bg-red-50 text-red-400 text-xs font-bold rounded-full whitespace-nowrap; }
+}
