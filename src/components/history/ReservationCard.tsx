@@ -5,6 +5,7 @@ import {
   reservationStatusClass,
   formatPrice,
   getFoodEmoji,
+  formatPickupTime,
 } from "../../utils";
 
 interface Props {
@@ -48,10 +49,8 @@ export default function ReservationCard({ reservation, onClick }: Props) {
       </div>
 
       <div className="flex flex-col gap-1">
-        <Row
-          label="픽업 시간"
-          value={`${item.pickupStart} ~ ${item.pickupEnd}`}
-        />
+        <Row label="픽업 시작" value={formatPickupTime(item.pickupStart)} />
+        <Row label="픽업 마감" value={formatPickupTime(item.pickupEnd)} />
         <Row
           label="가격"
           value={formatPrice(item.price, item.type)}
