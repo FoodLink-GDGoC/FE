@@ -1,6 +1,7 @@
 export type ItemStatus = "ACTIVE" | "RESERVED" | "DONE";
 export type ItemType = "GIVE" | "SELL";
 export type ReservationStatus = "CONFIRMED" | "PICKUP" | "CANCEL" | "NOSHOW";
+export type UserRole = "user" | "store";
 
 export interface NearbyItemRaw {
   itemId: number;
@@ -109,6 +110,58 @@ export interface CreateReservationResponse {
   store: {
     storeId: number;
     storeName: string;
+  };
+}
+
+// ── 매장 예약 목록 raw 응답 ────────────────────────────
+export interface StoreReservationItemRaw {
+  itemId: number;
+  name: string;
+  quantity: number;
+  price: number;
+  type: ItemType;
+  pickup_start: string; // snake_case
+  pickup_end: string; // snake_case
+  image?: string;
+}
+
+export interface StoreReservationUser {
+  userId: number;
+  nickname: string;
+  email: string;
+  phone?: string;
+  allergy?: string;
+}
+
+export interface StoreReservationRaw {
+  reservationId: number;
+  quantity: number;
+  status: ReservationStatus;
+  createdAt: string;
+  pickedUpAt: string | null;
+  userId: number;
+  itemId: number;
+  user: StoreReservationUser;
+  item: StoreReservationItemRaw;
+}
+
+// 화면에서 쓸 정규화된 타입
+export interface StoreReservation {
+  reservationId: number;
+  quantity: number;
+  status: ReservationStatus;
+  createdAt: string;
+  pickedUpAt: string | null;
+  user: StoreReservationUser;
+  item: {
+    itemId: number;
+    name: string;
+    quantity: number;
+    price: number;
+    type: ItemType;
+    pickupStart: string;
+    pickupEnd: string;
+    image?: string;
   };
 }
 
