@@ -15,6 +15,7 @@ import {
   reservationStatusClass,
   formatPrice,
   getFoodEmoji,
+  formatPickupTime,
 } from "../utils";
 import type { ReservationDetail } from "../types";
 
@@ -71,7 +72,6 @@ export default function ReservationDetailPage({
       <PageHeader title="예약 상세" onBack={onBack} />
 
       <div className="flex-1 overflow-y-auto px-5 pb-10 flex flex-col gap-3">
-        {/* 확정 배너 */}
         {isConfirmed && (
           <div className="flex items-center gap-2.5 bg-[#E6F4EC] border border-[#A8D9BC] rounded-xl px-3.5 py-3">
             <div className="w-7 h-7 bg-[#2D7D52] rounded-lg flex items-center justify-center flex-shrink-0">
@@ -88,11 +88,9 @@ export default function ReservationDetailPage({
           </div>
         )}
 
-        {/* 예약 항목 */}
         <div className="card">
           <p className="text-[12px] font-bold text-[#A0917F] mb-3">예약 항목</p>
           <div className="flex gap-3 pb-3 mb-1 border-b border-[#F0EBE4]">
-            {/* 이모지 폴백 */}
             <div className="w-11 h-11 rounded-xl bg-[#EDE7DF] flex items-center justify-center flex-shrink-0 overflow-hidden text-xl">
               {item.image && !imgError ? (
                 <img
@@ -127,17 +125,20 @@ export default function ReservationDetailPage({
           />
           <InfoRow
             icon={<Clock size={14} />}
-            label="픽업 시간"
-            value={`오늘 ${item.pickupStart} ~ ${item.pickupEnd}`}
+            label="픽업 시작"
+            value={formatPickupTime(item.pickupStart)}
+            brown
+          />
+          <InfoRow
+            icon={<Clock size={14} />}
+            label="픽업 마감"
+            value={formatPickupTime(item.pickupEnd)}
             brown
           />
           <InfoRow
             icon={<Calendar size={14} />}
             label="예약 일시"
-            value={new Date(data.createdAt).toLocaleString("ko-KR", {
-              dateStyle: "short",
-              timeStyle: "short",
-            })}
+            value={formatPickupTime(data.createdAt)}
           />
           <InfoRow
             icon={<CircleCheck size={14} />}
@@ -147,7 +148,6 @@ export default function ReservationDetailPage({
           />
         </div>
 
-        {/* 매장 정보 */}
         <div className="card">
           <p className="text-[12px] font-bold text-[#A0917F] mb-3">매장 정보</p>
           <InfoRow
@@ -194,7 +194,9 @@ function InfoRow({
 }: InfoRowProps) {
   const valueClass =
     customClass ??
-    `text-[13px] font-semibold ${green ? "text-[#2D7D52]" : brown ? "text-[#7C4D2F]" : "text-[#1A1208]"}`;
+    `text-[13px] font-semibold ${
+      green ? "text-[#2D7D52]" : brown ? "text-[#7C4D2F]" : "text-[#1A1208]"
+    }`;
 
   return (
     <div className="flex items-center justify-between py-2.5 border-b border-[#F0EBE4] last:border-0">
